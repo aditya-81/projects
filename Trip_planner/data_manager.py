@@ -1,9 +1,9 @@
-from pprint import pprint
 import requests
+from user_data import UserData
+SHEETY_PRICES_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/prices"
+SHEETY_USERS_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/users"
 
-SHEETY_PRICES_ENDPOINT = YOUR SHEETY PRICES ENDPOINT
-
-
+userdata= UserData()
 class DataManager:
 
     def __init__(self):
@@ -27,3 +27,13 @@ class DataManager:
                 json=new_data
             )
             print(response.text)
+
+    def add_user_Data(self):
+        json = {"user":
+                    {"firstName":userdata.first_name,
+                     "lastName":userdata.last_name,
+                     "email":userdata.email,
+                     }
+
+                }
+        response = requests.post(url = SHEETY_USERS_ENDPOINT,json = json)
