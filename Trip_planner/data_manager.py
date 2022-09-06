@@ -1,9 +1,9 @@
 import requests
-from user_data import UserData
+from GUI import Gui
 SHEETY_PRICES_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/prices"
 SHEETY_USERS_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/users"
 
-userdata= UserData()
+userdata= Gui().ud
 class DataManager:
 
     def __init__(self):

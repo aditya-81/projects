@@ -1,9 +1,17 @@
 from twilio.rest import Client
+import smtplib
+from GUI import Gui
+
+user = Gui().ud
 
 TWILIO_SID = "ACb284ed1ed3d96f59efe909cd4b88bfae"
 TWILIO_AUTH_TOKEN = "6c432d17f53dca57252f5ad0b46d915f"
 TWILIO_VIRTUAL_NUMBER = "+19785791161"
 TWILIO_VERIFIED_NUMBER = '+918825057720'
+
+email = "bhatadityatest@yahoo.com"
+password = "icgxjojzmqcgxanr"
+
 
 
 class NotificationManager:
@@ -20,3 +28,9 @@ class NotificationManager:
         )
         # Prints if successfully sent.
         print(message.sid)
+
+    def send_mail(self,msg):
+        stp = smtplib.SMTP("smtp.mail.yahoo.com", port=587)
+        stp.starttls()
+        stp.login(user=email, password=password)
+        stp.sendmail(email, user.email, msg)
