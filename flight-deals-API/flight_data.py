@@ -5,12 +5,12 @@ import requests
 
 class FlightData:
     def __init__(self):
+        self.now = dt.now()
+        self.day = self.now.day
+        self.month = int(self.now.month) + 6
+        self.year = int(self.now.year)
         self.date_to()
         self.dm = DataManager()
-        self.day =self.now.day
-        self.month = int(self.now.month)+6
-        self.year = int(self.now.year)
-
         self.url = "https://tequila-api.kiwi.com/v2/search"
         self.headers = {
             "apikey": "ekqFzpseqBRunPyyTQmyvT2q3dWXKNUF",
