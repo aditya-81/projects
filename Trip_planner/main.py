@@ -2,11 +2,19 @@ from datetime import datetime, timedelta
 from data_manager import DataManager
 from flight_search import FlightSearch
 from notification_manager import NotificationManager
+from user_data import UserData
+from cost_estimator import EstimatedCost
 
-data_manager = DataManager()
+user = UserData()
+user.input()
+
+data_manager = DataManager(user)
+data_manager.add_user_Data()
+
 sheet_data = data_manager.get_destination_data()
+
 flight_search = FlightSearch()
-notification_manager = NotificationManager()
+notification_manager = NotificationManager(user)
 
 ORIGIN_CITY_IATA = "DEL"
 
@@ -27,11 +35,20 @@ for destination in sheet_data:
         to_time=six_month_from_today
     )
     try:
-        message = f"Low price alert! Only Rs.{flight.price} to fly from" \
-                  f" {flight.origin_city}-{flight.origin_airport} to✈️ {flight.destination_city}-" \
-                  f"{flight.destination_airport}, from {flight.out_date} to {flight.return_date}."
 
         if flight.price < destination["lowestPrice"]:
+            # # cost = EstimatedCost(flight.destination_city)
+            # Get
+            # hotels as low
+            # " \
+            #                   f" as {cost.cost()} / per
+            # night!! Book
+            # tickets
+            # now!!✈️
+            # "
+            message = f"Low price alert! Only Rs.{flight.price} to fly from" \
+                      f" {flight.origin_city}-{flight.origin_airport} to✈️ {flight.destination_city}-" \
+                      f"{flight.destination_airport}, from {flight.out_date} to {flight.return_date}."
             notification_manager.send_sms(
                 message=message
             )

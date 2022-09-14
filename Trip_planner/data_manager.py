@@ -1,12 +1,13 @@
 import requests
-from GUI import Gui
+from user_data import UserData
 SHEETY_PRICES_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/prices"
 SHEETY_USERS_ENDPOINT = "https://api.sheety.co/a8282b732d4a0d57d0f1c0015545594b/copyOfFlightDeals/users"
 
-userdata= Gui().ud
+
 class DataManager:
 
-    def __init__(self):
+    def __init__(self,user):
+        self.userdata = user
         self.destination_data = {}
 
     def get_destination_data(self):
@@ -30,10 +31,11 @@ class DataManager:
 
     def add_user_Data(self):
         json = {"user":
-                    {"firstName":userdata.first_name,
-                     "lastName":userdata.last_name,
-                     "email":userdata.email,
+                    {"firstName":self.userdata.first_name,
+                     "lastName":self.userdata.last_name,
+                     "email":self.userdata.email,
                      }
 
                 }
         response = requests.post(url = SHEETY_USERS_ENDPOINT,json = json)
+        print(response.json())

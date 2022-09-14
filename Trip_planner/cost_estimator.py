@@ -10,17 +10,19 @@ class EstimatedCost:
         self.hotel_per_night_cost = 0
         self.city = city
         self.hotel_cost()
+
     def hotel_cost(self):
         self.driver.get("https://www.agoda.com/en-in/")
-        sleep(1)
         input = self.driver.find_element_by_xpath('//*[@id="SearchBoxContainer"]/div[1]/div/div[2]/div/div/div[2]/div/div/input')
         input.send_keys(self.city)
         sleep(2)
         input.send_keys(Keys.ENTER)
         self.driver.find_element_by_xpath('//*[@id="SearchBoxContainer"]/div[2]/button/div').click()
         self.hotel_per_night_cost = self.driver.find_element_by_class_name("PropertyCardPrice__Value").text
-        self.hotel_per_night_cost =+ int(''.join(self.hotel_per_night_cost.split(",")))
-
+        self.hotel_per_night_cost = int(''.join(self.hotel_per_night_cost.split(",")))
+        self.driver.quit()
+    def cost(self):
+        return self.hotel_cost()
 
 
 # c =EstimatedCost('BER').hotel_cost()
